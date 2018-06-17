@@ -47,7 +47,7 @@
     </dependencies>
 
     <build>
-        <finalName>dockerdemo</finalName>
+        <finalName>spring-boot-docker-demo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
