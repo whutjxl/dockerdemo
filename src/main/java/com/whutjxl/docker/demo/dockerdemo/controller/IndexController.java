@@ -10,15 +10,16 @@ import java.io.Console;
 @RestController
 public class IndexController {
 
-    private Logger logger= LogManager.getLogger(IndexController.class);
+    private Logger logger = LogManager.getLogger(IndexController.class);
+    private static int count = 0;
 
     @RequestMapping("/")
-    String root(){
+    String root() {
         return index();
     }
 
     @RequestMapping("/index")
-    String index(){
+    String index() {
         logger.info("index info");
         logger.warn("index warn");
         logger.error("index error");
@@ -26,10 +27,18 @@ public class IndexController {
     }
 
     @RequestMapping("/hello")
-    String hello(){
-        logger.info("hello world info");
-        logger.warn("hello world warn");
-        logger.error("hello world error");
-        return "===hello world===";
+    String hello() throws Exception {
+        if (count > 1000) {
+            count = 0;
+        }
+        count++;
+        logger.info("count = " + count);
+        logger.warn("count = " + count);
+        logger.error("count = " + count);
+        if (count > 20 && (count / 10) % 2 == 0) {
+            logger.error("create exception,count = "+count);
+            throw new Exception("create exception");
+        }
+        return "=== count = " + count + " ===";
     }
 }
